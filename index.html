@@ -1,76 +1,84 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- basic headers that links the javascript files to the html file -->
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <title>Clarifai JavaScript Stater</title>
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script type="text/javascript" src="predict.js"></script>
-  <script type="text/javascript" src="keys.js"></script>
-  <script type="text/javascript" src="https://sdk.clarifai.com/js/clarifai-latest.js"></script>
-  <script>
-      //creates a variable that catches the jey to use the API
-  try {
-    var app = new Clarifai.App({
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Hasherator</title>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="predict.js"></script>
+    <script type="text/javascript" src="keys.js"></script>
+    <script type="text/javascript" src="https://sdk.clarifai.com/js/clarifai-latest.js"></script>
+    <script>
+        //creates a variable that catches the jey to use the API
+        try {
+            var app = new Clarifai.App({
 
-     apiKey: myApiKey
-    });
-  }
-  catch(err) {
-    alert("Need a valid API Key!");
-    throw "Invalid API Key";
-  }
-  //make sure there's no descrepency with upper and lower case pictures file'
-  function validFile(imageName) {
-    var lowerImageName = imageName.toLowerCase();
-    return lowerImageName.search(/jpg|png|bmp|tiff/gi) != -1;
-  }
-  </script>
-  
-    
+                apiKey: myApiKey
+            });
+        } catch (err) {
+            alert("Need a valid API Key!");
+            throw "Invalid API Key";
+        }
+        //make sure there's no descrepency with upper and lower case pictures file'
+        function validFile(imageName) {
+            var lowerImageName = imageName.toLowerCase();
+            return lowerImageName.search(/jpg|png|bmp|tiff/gi) != -1;
+        }
+    </script>
+
+
     <!-- configure list to a certian margins -->
-  <style type="text/css">
-    body { margin-left:20px; margin-top:20px; margin-bottom:30px; font-family: sans-serif; height:100%}
-    ul {
-      list-style: none;
-      margin: 30px 0 0 0;
-      padding: 0;
-      columns: 1;
-      -webkit-columns: 1;
-      -moz-columns: 1;
-      overflow:auto;
-    }
-
-    /*sets font-face size and what type of is being used*/ 
-    ul li i{
-      font-family: "Lucida Console", Courier, monospace;
-      font-style: normal;
-      font-size: 16px;
-    }
-    /*the .conceptBox allows the adjustment for spacing between columns */
-    .conceptBox {
-      float:left; 
-      margin-left:40px; 
-      margin-top:15px;
-      margin-bottom:30px;
-      height:100%;
-    }
-
-      .center {
-          margin: auto;
-          width: 60%;
-          text-align: center;
-      }
-
-  </style>
-      <meta charset="utf-8" />
-      <link href="css/default.css" rel="stylesheet" />
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        body {
+            margin-left: 20px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            font-family: sans-serif;
+            height: 100%
+        }
+        
+        ul {
+            list-style: none;
+            margin: 30px 0 0 0;
+            padding: 0;
+            columns: 1;
+            -webkit-columns: 1;
+            -moz-columns: 1;
+            overflow: auto;
+        }
+        /*sets font-face size and what type of is being used*/
+        
+        ul li i {
+            font-family: "Lucida Console", Courier, monospace;
+            font-style: normal;
+            font-size: 16px;
+        }
+        /*the .conceptBox allows the adjustment for spacing between columns */
+        
+        .conceptBox {
+            float: left;
+            margin-left: 40px;
+            margin-top: 15px;
+            margin-bottom: 30px;
+            height: 100%;
+        }
+        
+        .center {
+            margin: auto;
+            width: 60%;
+            text-align: center;
+        }
+    </style>
+    <meta charset="utf-8" />
+    <link href="css/default.css" rel="stylesheet" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+
 <body>
     <!-- Title with a comment below -->
     <div class="container">
@@ -80,15 +88,15 @@
                 <p>Our goal is to help you find the right hastags</p>
             </div>
             <!--  counter to increment the table of indexes-->
-  <input type="hidden" id="hidden-counter" name="hidden-counter" value="1"/>
+            <input type="hidden" id="hidden-counter" name="hidden-counter" value="1" />
             <!-- First header that prompts user for image url-->
-  <h3>Enter image URL</h3>
-      <!-- creating a text box for the user to input and stores the value into imgurl -->
-    <input type="text" id="imgurl" placeholder="Image URL" size="50">
-      <!-- Creating a button, if the text block is left blank, then alerts user to enter a URL.
+            <h3>Enter image URL</h3>
+            <!-- creating a text box for the user to input and stores the value into imgurl -->
+            <input type="text" id="imgurl" placeholder="Image URL" size="50">
+            <!-- Creating a button, if the text block is left blank, then alerts user to enter a URL.
           else if limits the files choices to be used. Once finished, create a submit button
           and takes in the user input-->
-    <button onclick="
+            <button onclick="
       if(imgurl.value == '') { 
         alert('Please enter an image URL'); 
         return;
@@ -99,12 +107,12 @@
         return;
       }
       predict_click($('#imgurl').val(), 'url');">Submit</button>
-    <!--<br/><br/>-->
-      <!--Another button for uploading pictures from desktop/camera  -->
-        
-      <h3>Upload Image</h3>
-      <input type="file" id="filename" placeholder="Filename" />
-    <button onclick="
+            <!--<br/><br/>-->
+            <!--Another button for uploading pictures from desktop/camera  -->
+
+            <h3>Upload Image</h3>
+            <input type="file" id="filename" placeholder="Filename" />
+            <button onclick="
       if(filename.value == '') { 
         alert('Please upload a file'); 
         return;
@@ -115,20 +123,21 @@
         return;
       }
       predict_click($('#filename').val(), 'file');">Predict!</button>
-      <!-- creates a "choose file" button that takes in the arguement presented from the previous button -->
-    </center>
-  </div>
+            <!-- creates a "choose file" button that takes in the arguement presented from the previous button -->
+        </center>
+    </div>
 
-  <div id="predictions" class="center">
-    <div style="margin-top:30px; margin-left:20px; margin-bottom:30px; clear:left; float:left">
-      <img id="img_preview1" src="" width="400"/>
-      <br/>
+    <div id="predictions" class="center">
+        <div style="margin-top:30px; margin-left:20px; margin-bottom:30px; clear:left; float:left">
+            <img id="img_preview1" src="" width="400" />
+            <br/>
+        </div>
+        <!-- allows print of the column from the API -->
+        <div id="concepts" class="conceptBox">
+        </div>
     </div>
-      <!-- allows print of the column from the API -->
-    <div id="concepts" class="conceptBox">
-    </div>
-  </div>
-    
+
 
 </body>
+
 </html>
